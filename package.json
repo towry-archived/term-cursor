@@ -1,0 +1,9 @@
+{
+	"name": "term-cursor",
+	"description": "move cursor around on terminal",
+	"keywords": ["terminal", "cursor"],
+	"author": "Towry Wang <http://towry.me>",
+	"main": "index",
+	"dependencies": {},
+	"repository": "git@github.com:towry/term-cursor.git"
+}
