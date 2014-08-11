@@ -1,4 +1,4 @@
-var cursor = require('./');
+var cursor = require('../');
 
 var n = 0;
 var timer = null;
