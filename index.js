@@ -12,7 +12,7 @@ var util = require('util');
  */
 
 module.exports = cursor = {
-  VERSION: '0.0.1'
+  VERSION: '1.0.0'
 };
 
 /**
@@ -57,7 +57,7 @@ function factory(t) {
 
 
 /**
- * Move cursor left by n times
+ * cursor.{left|up|right|down}
  *
  * @param {Number} n
  * @api public
@@ -81,6 +81,17 @@ cursor.move = function (x, y) {
   moveY(x);
 
   return this;
+}
+
+/**
+ * Move back and clear the characters
+ *
+ * @api public
+ */
+cursor.back = function (n) {
+  var backs = Array(n + 1).join('\b \b');
+
+  return stdout.write(backs), this;
 }
 
 /**
