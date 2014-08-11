@@ -68,7 +68,7 @@ cursor.right = factory('right');
 cursor.down = factory('down');
 
 /**
- * Move to a spot
+ * Move onto a spot
  *
  * @param {Number}
  * @api public
@@ -84,11 +84,36 @@ cursor.move = function (x, y) {
 }
 
 /**
+ * Move to a spot
+ *
+ * @param {Number}
+ * @api public
+ */
+cursor.moveTo = function (x, y) {
+  if (!y) {
+    y = 0;
+  }
+
+  if (x < 0 || y < 0) {
+    throw new Error('params must be positive number.');
+  }
+
+  var loc = util.format('\u001B[%d;%df', x, y);
+  stdout.write(loc);
+
+  return this;
+}
+
+/**
  * Move back and clear the characters
  *
  * @api public
  */
 cursor.back = function (n) {
+  if (!n || n < 0) {
+    return cursor.reset();
+  }
+
   var backs = Array(n + 1).join('\b \b');
 
   return stdout.write(backs), this;
