@@ -34,83 +34,53 @@ var escs = {
 var stdout = process.stdout;
 
 /**
+ * The factory
+ *
+ * @api private
+ */
+function factory(t) {
+  return function (n) {
+    if (n && typeof n !== 'number') {
+      throw new Error('The param must be a number.');
+    }
+
+    if (!n || n === 0) {
+      return this;
+    }
+
+    var escstr = util.format(escs[t], n);
+    stdout.write(escstr);
+
+    return this;
+  }
+}
+
+
+/**
  * Move cursor left by n times
  *
  * @param {Number} n
  * @api public
  */
-
-cursor.left = function (n) {
-  if (n && typeof n !== 'number') {
-    throw new Error("The param must be a number.");
-  }
-
-  if (!n || n === 0) {
-    return;
-  }
-
-  var escstr = util.format(escs.left, n);
-  stdout.write(escstr);
-}
+cursor.left = factory('left');
+cursor.up = factory('up');
+cursor.right = factory('right');
+cursor.down = factory('down');
 
 /**
- * Move cursor up by n times
+ * Move to a spot
  *
- * @param {Number} n
+ * @param {Number}
  * @api public
  */
+cursor.move = function (x, y) {
+  var moveX = x > 0 ? this.right : this.left;
+  var moveY = y > 0 ? this.down : this.up;
 
-cursor.up = function (n) {
-  if (n && typeof n !== 'number') {
-    throw new Error("The param must be a number");
-  }
+  moveX(x);
+  moveY(x);
 
-  if (!n || n === 0) {
-    return;
-  }
-
-  var escstr = util.format(escs.up, n);
-  stdout.write(escstr);
-}
-
-/**
- * Move cursor right by n times
- *
- * @param {Number} n
- * @api public
- */
-
-cursor.right = function (n) {
-  if (n && typeof n !== 'number') {
-    throw new Error("The param must be a number");
-  }
-
-  if (!n || n === 0) {
-    return;
-  }
-
-  var escstr = util.format(escs.right, n);
-  stdout.write(escstr);
-}
-
-/**
- * Move cursor down by n times
- *
- * @param {Number} n
- * @api public
- */
-
-cursor.down = function (n) {
-  if (n && typeof n !== 'number') {
-    throw new Error("The param must be a number");
-  }
-
-  if (!n || n === 0) {
-    return;
-  }
-
-  var escstr = util.format(escs.down, n);
-  stdout.write(escstr);
+  return this;
 }
 
 /**
@@ -118,9 +88,10 @@ cursor.down = function (n) {
  *
  * @api public
  */
-
 cursor.reset = function () {
   stdout.write(escs.reset);
+
+  return this;
 }
 
 /**
@@ -129,7 +100,6 @@ cursor.reset = function () {
  *
  * @api public
  */
-
 cursor.write = function (s) {
-  return stdout.write(s);
+  return stdout.write(s), this;
 }

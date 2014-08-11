@@ -1,7 +1,7 @@
 {
 	"name": "term-cursor",
 	"description": "move cursor around on terminal",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"keywords": ["terminal", "cursor"],
 	"author": "Towry Wang <http://towry.me>",
 	"main": "index",

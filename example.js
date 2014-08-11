@@ -20,3 +20,7 @@ timer = setInterval(function () {
   }
   n+=1;
 }, 1010);
+
+cursor.right(2).left(1).down(1).write('hi');
+
+cursor.move(3, 7).write('hello?');
