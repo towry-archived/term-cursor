@@ -8,7 +8,7 @@ $ npm install term-cursor
 
 ## Usage
 
-The parameters for `cursor.{up|left|down|right}` is a number and must
+The parameter for `cursor.{up|left|down|right}` is a number and must
 be a number.
 
 ```javascript

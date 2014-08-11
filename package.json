@@ -5,5 +5,5 @@
 	"author": "Towry Wang <http://towry.me>",
 	"main": "index",
 	"dependencies": {},
-	"repository": "git@github.com:towry/term-cursor.git"
+	"repository": "git://github.com:towry/term-cursor.git"
 }
