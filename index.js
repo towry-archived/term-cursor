@@ -12,7 +12,7 @@ var util = require('util');
  */
 
 module.exports = cursor = {
-  VERSION: '1.0.0'
+  VERSION: '1.0.2'
 };
 
 /**
@@ -74,6 +74,10 @@ cursor.down = factory('down');
  * @api public
  */
 cursor.move = function (x, y) {
+  if (!y) {
+    y = 0;
+  }
+
   var moveX = x > 0 ? this.right : this.left;
   var moveY = y > 0 ? this.down : this.up;
 
@@ -98,7 +102,11 @@ cursor.moveTo = function (x, y) {
     throw new Error('params must be positive number.');
   }
 
+<<<<<<< HEAD
   var loc = util.format('\u001B[%d;%df', x, y);
+=======
+  var loc = util.format('\u001B[%d;%df', y, x);
+>>>>>>> master
   stdout.write(loc);
 
   return this;
